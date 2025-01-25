@@ -71,10 +71,9 @@ class BoardManager
     return $data;
   }
 
-  public function getAvailableFiles($boardData) 
+  public function getAvailableFiles($baseFolder, $boardData) 
   {
-    $baseFolder = Config::getInstance()->getBasePath();
-    $folderContent = array_filter(scandir($baseFolder), function($file) use ($baseFolder) {
+    $folderContent = array_filter( scandir($baseFolder), function($file) use ($baseFolder) {
       return ! in_array($file, ['.', '..', '.sys']) && is_file($baseFolder . '/' . $file);
     });
     

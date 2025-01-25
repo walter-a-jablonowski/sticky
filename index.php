@@ -6,7 +6,8 @@ require_once 'lib/Config.php';
 $config         = Config::getInstance();
 $boardManager   = new BoardManager();
 $boardData      = $boardManager->getBoardData();
-$availableFiles = $boardManager->getAvailableFiles($boardData);
+$baseFolder     = $config->getBasePath();
+$availableFiles = $boardManager->getAvailableFiles($baseFolder, $boardData);
 
 ?>
 <!DOCTYPE html>
