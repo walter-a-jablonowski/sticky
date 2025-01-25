@@ -1,5 +1,7 @@
-class Board {
-  constructor() {
+class Board
+{
+  constructor()
+  {
     this.whiteboard = document.getElementById('whiteboard')
     this.widgets = new Map()
     this.connections = new Map()
@@ -13,13 +15,15 @@ class Board {
     this.initializeEventListeners()
   }
 
-  initializeWidgets() {
-    document.querySelectorAll('.widget').forEach(widget => {
+  initializeWidgets()
+  {
+    document.querySelectorAll('.widget').forEach( widget => {
       this.widgets.set(widget.id, widget)
       this.initializeWidget(widget)
     })
     
     // Initialize connections after all widgets are set up
+
     fetch('ajax.php', {
       method: 'POST',
       headers: {
@@ -29,8 +33,8 @@ class Board {
         action: 'getBoardData'
       })
     })
-    .then(response => response.json())
-    .then(data => {
+    .then( response => response.json())
+    .then( data => {
       if(data.success && data.board && data.board.connections) {
         console.log('Loading connections:', data.board.connections)
         data.board.connections.forEach(connection => {
@@ -38,10 +42,11 @@ class Board {
         })
       }
     })
-    .catch(error => console.error('Error loading connections:', error))
+    .catch( error => console.error('Error loading connections:', error))
   }
 
-  initializeWidget(widget) {
+  initializeWidget( widget )
+  {
     // Make widget draggable
     const header = widget.querySelector('.widget-header')
     header.addEventListener('mousedown', e => {
@@ -90,7 +95,7 @@ class Board {
     const content = widget.querySelector('.text-content')
     if(content) {
       content.addEventListener('blur', () => {
-        this.saveWidgetContent(widget.id, content.textContent)
+        this.saveWidgetContent( widget.id, content.textContent)
       })
     }
 
@@ -107,7 +112,8 @@ class Board {
     })
   }
 
-  initializeEventListeners() {
+  initializeEventListeners()
+  {
     document.addEventListener('mousemove', e => {
       this.handleDrag(e)
     })
@@ -118,7 +124,8 @@ class Board {
     
     // Add widget dropdown
     const dropdown = document.querySelector('.add-widget-dropdown')
-    if(dropdown) {
+    if(dropdown)
+    {
       // New MD file
       const newMdBtn = dropdown.querySelector('[data-action="new-md"]')
       if(newMdBtn) {
@@ -132,7 +139,7 @@ class Board {
       // Existing files
       const fileLinks = dropdown.querySelectorAll('[data-file]')
       console.log('Found file links:', fileLinks.length)
-      fileLinks.forEach(link => {
+      fileLinks.forEach( link => {
         link.addEventListener('click', e => {
           e.preventDefault()
           const file = link.dataset.file
@@ -162,7 +169,8 @@ class Board {
     })
   }
 
-  startDragging(e, widget) {
+  startDragging( e, widget )
+  {
     if(e.target.closest('.widget-controls')) return
     
     this.draggedWidget = widget
@@ -174,32 +182,35 @@ class Board {
     widget.style.zIndex = 1000
   }
 
-  handleDrag(e) {
+  handleDrag(e)
+  {
     if( ! this.draggedWidget) return
     
     const x = e.clientX - this.dragOffset.x
     const y = e.clientY - this.dragOffset.y
     
     this.draggedWidget.style.left = `${x}px`
-    this.draggedWidget.style.top = `${y}px`
+    this.draggedWidget.style.top  = `${y}px`
     
     this.updateConnections(this.draggedWidget)
   }
 
-  stopDragging() {
+  stopDragging()
+  {
     if( ! this.draggedWidget) return
     
     const position = {
-      x: parseInt(this.draggedWidget.style.left),
-      y: parseInt(this.draggedWidget.style.top)
+      x: parseInt( this.draggedWidget.style.left),
+      y: parseInt( this.draggedWidget.style.top)
     }
     
-    this.updateWidgetData(this.draggedWidget.id, { position })
+    this.updateWidgetData( this.draggedWidget.id, { position })
     this.draggedWidget.style.zIndex = ''
     this.draggedWidget = null
   }
 
-  startConnection(widget) {
+  startConnection( widget )
+  {
     this.connectionStart = widget
     const handle = widget.querySelector('.connection-handle')
     handle.classList.add('active')
@@ -215,10 +226,11 @@ class Board {
     // Add mousemove event listener to track connection drawing
     this.drawingConnection = true
     document.addEventListener('mousemove', this.handleConnectionDraw.bind(this))
-    document.addEventListener('mouseup', this.handleConnectionEnd.bind(this))
+    document.addEventListener('mouseup',   this.handleConnectionEnd.bind(this))
   }
 
-  handleConnectionDraw(e) {
+  handleConnectionDraw(e)
+  {
     if( ! this.drawingConnection) return
     
     const startPoint = this.getWidgetCenter(this.connectionStart)
@@ -230,13 +242,13 @@ class Board {
     this.updateTempLine(startPoint, endPoint)
   }
 
-  handleConnectionEnd(e) {
+  handleConnectionEnd(e)
+  {
     if( ! this.drawingConnection) return
     
     const targetWidget = this.findTargetWidget(e)
-    if(targetWidget && targetWidget !== this.connectionStart) {
+    if( targetWidget && targetWidget !== this.connectionStart)
       this.createConnection(this.connectionStart, targetWidget)
-    }
     
     // Clean up event listeners
     document.removeEventListener('mousemove', this.handleConnectionDraw.bind(this))
@@ -245,19 +257,20 @@ class Board {
     this.cancelConnection()
   }
 
-  cancelConnection() {
-    if(this.connectionStart) {
+  cancelConnection()
+  {
+    if( this.connectionStart ) {
       const handle = this.connectionStart.querySelector('.connection-handle')
       handle.classList.remove('active')
     }
     
-    if(this.tempLine) {
+    if( this.tempLine ) {
       this.tempLine.remove()
       this.tempLine = null
     }
     
     // Clean up event listeners
-    if(this.drawingConnection) {
+    if( this.drawingConnection ) {
       document.removeEventListener('mousemove', this.handleConnectionDraw.bind(this))
       document.removeEventListener('mouseup', this.handleConnectionEnd.bind(this))
       this.drawingConnection = false
@@ -266,7 +279,8 @@ class Board {
     this.connectionStart = null
   }
 
-  async createConnection(sourceWidget, targetWidget) {
+  async createConnection( sourceWidget, targetWidget )
+  {
     const response = await fetch('ajax.php', {
       method: 'POST',
       headers: {
@@ -281,12 +295,11 @@ class Board {
     })
     
     const data = await response.json()
-    if(data.success) {
-      this.addConnectionToDOM(data.connection)
-    }
+    if(data.success)  this.addConnectionToDOM(data.connection)
   }
 
-  addConnectionToDOM(connection) {
+  addConnectionToDOM( connection )
+  {
     console.log('Adding connection to DOM:', connection)
     const sourceWidget = this.widgets.get(connection.sourceId)
     const targetWidget = this.widgets.get(connection.targetId)
@@ -297,13 +310,14 @@ class Board {
     }
     
     const line = document.createElement('div')
-    line.id = connection.id
+    line.id    = connection.id
     line.className = `connection ${connection.isArrow ? 'arrow' : ''}`
     this.whiteboard.appendChild(line)
     
-    if(connection.label) {
+    if(connection.label)
+    {
       const label = document.createElement('div')
-      label.className = 'connection-label'
+      label.className   = 'connection-label'
       label.textContent = connection.label
       label.contentEditable = true
       label.addEventListener('blur', () => {
@@ -312,7 +326,7 @@ class Board {
       this.whiteboard.appendChild(label)
     }
     
-    this.connections.set(connection.id, {
+    this.connections.set( connection.id, {
       element: line,
       label: connection.label ? label : null,
       sourceId: connection.sourceId,
@@ -320,20 +334,22 @@ class Board {
     })
     
     // Update position after adding to DOM
-    requestAnimationFrame(() => {
+    requestAnimationFrame( () => {
       this.updateConnectionPosition(connection.id)
     })
   }
 
-  updateConnections(widget) {
-    this.connections.forEach((conn, id) => {
+  updateConnections( widget )
+  {
+    this.connections.forEach( (conn, id) => {
       if(conn.sourceId === widget.id || conn.targetId === widget.id) {
         this.updateConnectionPosition(id)
       }
     })
   }
 
-  updateConnectionPosition(connectionId) {
+  updateConnectionPosition( connectionId )
+  {
     const conn = this.connections.get(connectionId)
     if( ! conn) {
       console.error('Connection missing:', connectionId)
@@ -349,7 +365,7 @@ class Board {
     }
     
     const start = this.getWidgetCenter(sourceWidget)
-    const end = this.getWidgetCenter(targetWidget)
+    const end   = this.getWidgetCenter(targetWidget)
     
     this.updateLine(conn.element, start, end, targetWidget)
     
@@ -363,8 +379,9 @@ class Board {
     }
   }
 
-  updateLine(line, start, end, widget) {
-    const widgetRect = widget.getBoundingClientRect();
+  updateLine( line, start, end, widget )
+  {
+    const widgetRect    = widget.getBoundingClientRect();
     const widgetCenterX = widgetRect.left + widgetRect.width / 2;
     const widgetCenterY = widgetRect.top + widgetRect.height / 2;
 
@@ -386,12 +403,13 @@ class Board {
     const angle = Math.atan2(intersectionY - start.y, intersectionX - start.x) * 180 / Math.PI;
 
     line.style.width = `${newLength}px`
-    line.style.left = `${start.x}px`
-    line.style.top = `${start.y}px`
+    line.style.left  = `${start.x}px`
+    line.style.top   = `${start.y}px`
     line.style.transform = `rotate(${angle}deg)`
   }
 
-  updateTempLine(start, end) {
+  updateTempLine( start, end )
+  {
     if( ! this.tempLine) return
     
     const dx = end.x - start.x
@@ -400,15 +418,16 @@ class Board {
     const angle = Math.atan2(dy, dx) * 180 / Math.PI
     
     this.tempLine.style.width = `${length}px`
-    this.tempLine.style.left = `${start.x}px`
-    this.tempLine.style.top = `${start.y}px`
+    this.tempLine.style.left  = `${start.x}px`
+    this.tempLine.style.top   = `${start.y}px`
     this.tempLine.style.transform = `rotate(${angle}deg)`
   }
 
-  getWidgetCenter(widget) {
+  getWidgetCenter( widget )
+  {
     const rect = widget.getBoundingClientRect()
     const scrollLeft = this.whiteboard.scrollLeft
-    const scrollTop = this.whiteboard.scrollTop
+    const scrollTop  = this.whiteboard.scrollTop
     
     // TASK: quick and dirty fix for y shift of lines (AI unable to fix this 2501)
     // Subtract a percentage of the widget's height from the y-coordinate
@@ -420,37 +439,41 @@ class Board {
     }
   }
 
-  findTargetWidget(e) {
+  findTargetWidget(e)
+  {
     const elements = document.elementsFromPoint(e.clientX, e.clientY)
-    for(const element of elements) {
+    for( const element of elements ) {
       const widget = element.closest('.widget')
       if(widget && widget !== this.connectionStart)
         return widget
     }
+
     return null
   }
 
-  async createNewMdWidget() {
+  async createNewMdWidget()
+  {
     const response = await fetch('ajax.php', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json'
       },
       body: JSON.stringify({
-        action: 'createWidget',
-        type: 'text',
+        action:  'createWidget',
+        type:    'text',
         content: ''
       })
     })
     
     const data = await response.json()
-    if(data.success) {
+    if(data.success)
       location.reload()
-    }
   }
 
-  async addExistingFile(file) {
+  async addExistingFile(file)
+  {
     console.log('Adding file:', file)
+
     try {
       const response = await fetch('ajax.php', {
         method: 'POST',
@@ -466,17 +489,18 @@ class Board {
       const data = await response.json()
       console.log('Server response:', data)
       
-      if(data.success) {
+      if(data.success)
         location.reload()
-      } else {
+      else
         console.error('Failed to add widget:', data.error || 'Unknown error')
-      }
-    } catch(error) {
+    }
+    catch(error) {
       console.error('Error adding widget:', error)
     }
   }
 
-  async removeWidget(widget) {
+  async removeWidget(widget)
+  {
     const response = await fetch('ajax.php', {
       method: 'POST',
       headers: {
@@ -484,13 +508,13 @@ class Board {
       },
       body: JSON.stringify({
         action: 'removeWidget',
-        id: widget.id
+        id:     widget.id
       })
     })
     
     const data = await response.json()
-    if(data.success) {
-      // Remove associated connections
+
+    if( data.success ) {  // remove associated connections
       this.connections.forEach((conn, id) => {
         if(conn.sourceId === widget.id || conn.targetId === widget.id) {
           conn.element.remove()
@@ -498,11 +522,13 @@ class Board {
           this.connections.delete(id)
         }
       })
+
       widget.remove()
     }
   }
 
-  async deleteWidget(widget) {
+  async deleteWidget( widget )
+  {
     const response = await fetch('ajax.php', {
       method: 'POST',
       headers: {
@@ -515,7 +541,8 @@ class Board {
     })
     
     const data = await response.json()
-    if(data.success) {
+    
+    if( data.success ) {
       // Remove associated connections
       this.connections.forEach((conn, id) => {
         if(conn.sourceId === widget.id || conn.targetId === widget.id) {
@@ -524,11 +551,13 @@ class Board {
           this.connections.delete(id)
         }
       })
+
       widget.remove()
     }
   }
 
-  async updateWidgetData(id, updates) {
+  async updateWidgetData( id, updates )
+  {
     await fetch('ajax.php', {
       method: 'POST',
       headers: {
@@ -542,7 +571,8 @@ class Board {
     })
   }
 
-  async saveWidgetContent(id, content) {
+  async saveWidgetContent( id, content )
+  {
     await fetch('ajax.php', {
       method: 'POST',
       headers: {
@@ -556,7 +586,8 @@ class Board {
     })
   }
 
-  async updateConnection(id, updates) {
+  async updateConnection( id, updates )
+  {
     await fetch('ajax.php', {
       method: 'POST',
       headers: {
@@ -569,7 +600,6 @@ class Board {
       })
     })
   }
-
 }
 
 // Initialize the board when the page loads

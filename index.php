@@ -68,6 +68,7 @@ $availableFiles = $boardManager->getAvailableFiles( $config->get('base_folder'),
               <pre><?= htmlspecialchars( file_get_contents("$baseFolder/$element[source]")) ?></pre>
             </div>
           <?php elseif( $element['type'] === 'image'): ?>
+            <!-- TASK: maybe we need to dump the image cause we can't access it in gd -->
             <img src="<?= htmlspecialchars("$baseFolder/$element[source]") ?>" alt="Image">
           <?php endif; ?>
         </div>

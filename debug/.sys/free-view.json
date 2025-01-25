@@ -5,8 +5,8 @@
             "type": "text",
             "source": "sample1.md",
             "position": {
-                "x": 20,
-                "y": 20
+                "x": 88,
+                "y": 150
             },
             "dimensions": {
                 "width": 300,
@@ -19,25 +19,26 @@
             "type": "text",
             "source": "sample2.md",
             "position": {
-                "x": 694,
-                "y": 336
+                "x": 602,
+                "y": 213
             },
             "dimensions": {
                 "width": 300,
                 "height": 200
-            }
+            },
+            "color": "#f0f0f0"
         },
         {
-            "id": "widget_679536ad56c37",
+            "id": "widget_679547489c912",
             "type": "image",
             "source": "images.jpg",
             "position": {
-                "x": 463,
-                "y": 21
+                "x": 1025,
+                "y": 60
             },
             "dimensions": {
-                "width": 300,
-                "height": 200
+                "width": 301,
+                "height": 287
             }
         }
     ],
