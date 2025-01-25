@@ -367,19 +367,20 @@ class Board {
     const widgetRect = widget.getBoundingClientRect();
     const widgetCenterX = widgetRect.left + widgetRect.width / 2;
     const widgetCenterY = widgetRect.top + widgetRect.height / 2;
-    
+
     const dx = end.x - start.x;
     const dy = end.y - start.y;
     const scale = Math.min(
       Math.abs((widgetRect.width / 2) / dx),
       Math.abs((widgetRect.height / 2) / dy)
     );
-    const intersectionX = widgetCenterX - dx * scale;
-    const intersectionY = widgetCenterY - dy * scale;
-    
+    const offset = 5; // TASK: hardcoded offset arrow slightly hidden (AI unable to fix this 2501)
+    const intersectionX = widgetCenterX - dx * scale - offset;
+    const intersectionY = widgetCenterY - dy * scale - offset;
+
     const newLength = Math.sqrt(Math.pow(intersectionX - start.x, 2) + Math.pow(intersectionY - start.y, 2));
     const angle = Math.atan2(intersectionY - start.y, intersectionX - start.x) * 180 / Math.PI;
-    
+
     line.style.width = `${newLength}px`
     line.style.left = `${start.x}px`
     line.style.top = `${start.y}px`
