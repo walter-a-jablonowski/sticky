@@ -39,13 +39,6 @@ class BoardManager
     file_put_contents($this->boardFile, json_encode($data, JSON_PRETTY_PRINT));
   }
 
-  public function getCurrentFolderContent()
-  {
-    return array_filter( scandir('.'), function($file) {
-      return ! in_array( $file, ['.', '..', '.sys']) && is_file($file);
-    });
-  }
-
   public function getBoardData() 
   {
     if( ! file_exists($this->boardFile) )
@@ -78,10 +71,15 @@ class BoardManager
     return $data;
   }
 
-  public function getAvailableFiles($folderContent, $boardData) 
+  public function getAvailableFiles($boardData) 
   {
+    $baseFolder = Config::getInstance()->getBasePath();
+    $folderContent = array_filter(scandir($baseFolder), function($file) use ($baseFolder) {
+      return ! in_array($file, ['.', '..', '.sys']) && is_file($baseFolder . '/' . $file);
+    });
+    
     $usedFiles = array_column($boardData['elements'], 'source');
-    return array_values( array_diff($folderContent, $usedFiles));
+    return array_values(array_diff($folderContent, $usedFiles));
   }
 
   public function saveBoardData($data) 

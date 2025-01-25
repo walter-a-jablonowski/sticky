@@ -5,9 +5,8 @@ require_once 'lib/Config.php';
 
 $config         = Config::getInstance();
 $boardManager   = new BoardManager();
-$folderContent  = $boardManager->getCurrentFolderContent();  // TASK: unneeded just use the use folder from config
 $boardData      = $boardManager->getBoardData();
-$availableFiles = $boardManager->getAvailableFiles($folderContent, $boardData);
+$availableFiles = $boardManager->getAvailableFiles($boardData);
 
 ?>
 <!DOCTYPE html>
