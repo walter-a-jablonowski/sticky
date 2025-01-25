@@ -37,8 +37,7 @@
             },
             "dimensions": {
                 "width": 300,
-                "height": 200,
-                "color": "#f0f0f0"
+                "height": 200
             }
         }
     ],

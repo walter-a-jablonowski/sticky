@@ -6,8 +6,8 @@ require_once 'lib/Config.php';
 $config         = Config::getInstance();
 $boardManager   = new BoardManager();
 $boardData      = $boardManager->getBoardData();
-$baseFolder     = $config->getBasePath();
-$availableFiles = $boardManager->getAvailableFiles($baseFolder, $boardData);
+$baseFolder     = $config->get('base_folder');
+$availableFiles = $boardManager->getAvailableFiles( $config->get('base_folder'), $boardData);
 
 ?>
 <!DOCTYPE html>
@@ -65,10 +65,10 @@ $availableFiles = $boardManager->getAvailableFiles($baseFolder, $boardData);
         <div class="widget-content">
           <?php if( $element['type'] === 'text'): ?>
             <div class="text-content" contenteditable="true">
-              <pre><?= htmlspecialchars( file_get_contents($baseFolder . '/' . $element['source'])) ?></pre>
+              <pre><?= htmlspecialchars( file_get_contents("$baseFolder/$element[source]")) ?></pre>
             </div>
           <?php elseif( $element['type'] === 'image'): ?>
-            <img src="<?= htmlspecialchars($baseFolder . '/' . $element['source']) ?>" alt="Image">
+            <img src="<?= htmlspecialchars("$baseFolder/$element[source]") ?>" alt="Image">
           <?php endif; ?>
         </div>
       </div>

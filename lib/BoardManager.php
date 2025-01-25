@@ -11,8 +11,8 @@ class BoardManager
   
   public function __construct() 
   {
-    $this->config = Config::getInstance();
-    $this->basePath = $this->config->getBasePath();
+    $this->config    = Config::getInstance();
+    $this->basePath  = $this->config->getBasePath();  // TASK: just use $config->get('base_folder')
     $this->boardFile = $this->basePath . '/' . $this->config->get('board_file');
     $this->defaultDimensions = $this->config->get('default_widget');
     

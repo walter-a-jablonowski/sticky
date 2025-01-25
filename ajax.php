@@ -29,7 +29,7 @@ function determineFileType($filename)
 
 try {
 
-  switch($input['action'])
+  switch( $input['action'] )
   {
     case 'getBoardData':
       $data = $boardManager->getBoardData();
@@ -37,7 +37,7 @@ try {
       break;
       
     case 'createWidget':
-      $filename = $config->getBasePath() . '/- new - ' . date('YmdHis') . '.md';
+      $filename = $config->get('base_folder') . '/- new - ' . date('YmdHis') . '.md';
       file_put_contents($filename, $input['content']);
       $widget = $boardManager->addWidget($filename, 'text');
       echo json_encode(['success' => true, 'widget' => $widget]);
