@@ -3,10 +3,10 @@ require_once 'vendor/autoload.php';
 require_once 'lib/BoardManager.php';
 require_once 'lib/Config.php';
 
-$config = Config::getInstance();
-$boardManager = new BoardManager();
-$folderContent = $boardManager->getCurrentFolderContent();
-$boardData = $boardManager->getBoardData();
+$config         = Config::getInstance();
+$boardManager   = new BoardManager();
+$folderContent  = $boardManager->getCurrentFolderContent();
+$boardData      = $boardManager->getBoardData();
 $availableFiles = $boardManager->getAvailableFiles($folderContent, $boardData);
 
 ?>
@@ -20,13 +20,13 @@ $availableFiles = $boardManager->getAvailableFiles($folderContent, $boardData);
 </head>
 <body>
   <header>
-    <div class="folder-name"><?php echo htmlspecialchars(basename($config->get('base_folder'))); ?></div>
+    <div class="folder-name"><?= htmlspecialchars( basename($config->get('base_folder'))) ?></div>
     <div class="add-widget-dropdown">
       <button class="dropdown-btn">Add Widget</button>
       <div class="dropdown-content">
         <a href="#" data-action="new-md">New MD</a>
         <?php foreach($availableFiles as $file): ?>
-          <a href="#" data-file="<?php echo htmlspecialchars($file); ?>"><?php echo htmlspecialchars(basename($file)); ?></a>
+          <a href="#" data-file="<?= htmlspecialchars($file) ?>"><?= htmlspecialchars( basename($file)) ?></a>
         <?php endforeach; ?>
       </div>
     </div>
@@ -35,17 +35,17 @@ $availableFiles = $boardManager->getAvailableFiles($folderContent, $boardData);
   <main id="whiteboard">
     <?php foreach($boardData['elements'] as $element): ?>
       <div class="widget" 
-           id="<?php echo htmlspecialchars($element['id']); ?>"
-           data-type="<?php echo htmlspecialchars($element['type']); ?>"
-           data-source="<?php echo htmlspecialchars($element['source']); ?>"
-           style="left: <?php echo $element['position']['x']; ?>px; 
-                  top: <?php echo $element['position']['y']; ?>px;
-                  width: <?php echo $element['dimensions']['width']; ?>px;
-                  height: <?php echo $element['dimensions']['height']; ?>px;
-                  background-color: <?php echo htmlspecialchars($element['color'] ?? '#f0f0f0'); ?>;">
+           id="<?= htmlspecialchars($element['id']) ?>"
+           data-type="<?= htmlspecialchars($element['type']) ?>"
+           data-source="<?= htmlspecialchars($element['source']) ?>"
+           style="left: <?= $element['position']['x'] ?>px; 
+                  top: <?= $element['position']['y'] ?>px;
+                  width: <?= $element['dimensions']['width'] ?>px;
+                  height: <?= $element['dimensions']['height'] ?>px;
+                  background-color: <?= htmlspecialchars($element['color'] ?? '#f0f0f0') ?>;">
         <div class="widget-header">
           <div class="connection-handle"></div>
-          <span class="widget-title" contenteditable="true"><?php echo htmlspecialchars(basename($element['source'])); ?></span>
+          <span class="widget-title" contenteditable="true"><?= htmlspecialchars( basename($element['source'])) ?></span>
           <div class="widget-controls">
             <div class="dropdown">
               <button class="dropdown-btn">⋮</button>
