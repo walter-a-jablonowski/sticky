@@ -5,12 +5,12 @@
             "type": "text",
             "source": "sample1.md",
             "position": {
-                "x": 76,
-                "y": 77
+                "x": 133,
+                "y": 79
             },
             "dimensions": {
-                "width": 321,
-                "height": 201
+                "width": 397,
+                "height": 424
             }
         },
         {
@@ -18,8 +18,8 @@
             "type": "text",
             "source": "sample2.md",
             "position": {
-                "x": 875,
-                "y": 125
+                "x": 899,
+                "y": 63
             },
             "dimensions": {
                 "width": 378,

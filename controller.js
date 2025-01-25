@@ -374,7 +374,11 @@ class Board {
       Math.abs((widgetRect.width / 2) / dx),
       Math.abs((widgetRect.height / 2) / dy)
     );
-    const offset = 5; // TASK: hardcoded offset arrow slightly hidden (AI unable to fix this 2501)
+
+    // TASK: hardcoded offset arrow slightly hidden (AI unable to fix this 2501)
+    // looks like it isn't from center to center anymore but from center to edge
+
+    const offset = 5;
     const intersectionX = widgetCenterX - dx * scale - offset;
     const intersectionY = widgetCenterY - dy * scale - offset;
 
