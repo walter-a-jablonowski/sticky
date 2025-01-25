@@ -90,7 +90,8 @@ header {
   min-width: 200px;
   min-height: 100px;
   resize: both;
-  overflow: auto;
+  height: 100%;
+  overflow: hidden;
   z-index: 10;
 }
 
@@ -142,8 +143,8 @@ header {
 
 .widget-content {
   padding: 10px;
-  height: calc(100% - 40px);
-  overflow: auto;
+  height: calc(100% - 60px);
+  overflow-y: auto;
 }
 
 .text-content {
