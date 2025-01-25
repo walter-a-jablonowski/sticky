@@ -1,50 +1,52 @@
 {
     "elements": [
         {
-            "id": "widget_67951334b515e",
+            "id": "widget_6795369d5617b",
             "type": "text",
             "source": "sample1.md",
             "position": {
-                "x": 114,
-                "y": 218
+                "x": 20,
+                "y": 20
             },
             "dimensions": {
-                "width": 374,
-                "height": 330
+                "width": 300,
+                "height": 200,
+                "color": "#f0f0f0"
             }
         },
         {
-            "id": "widget_679513375122b",
+            "id": "widget_679536a150282",
             "type": "text",
             "source": "sample2.md",
             "position": {
-                "x": 899,
-                "y": 63
-            },
-            "dimensions": {
-                "width": 353,
-                "height": 378
-            }
-        },
-        {
-            "id": "widget_67952955b00ba",
-            "type": "image",
-            "source": "images.jpg",
-            "position": {
-                "x": 522,
-                "y": 30
+                "x": 694,
+                "y": 336
             },
             "dimensions": {
                 "width": 300,
                 "height": 200
             }
+        },
+        {
+            "id": "widget_679536ad56c37",
+            "type": "image",
+            "source": "images.jpg",
+            "position": {
+                "x": 463,
+                "y": 21
+            },
+            "dimensions": {
+                "width": 300,
+                "height": 200,
+                "color": "#f0f0f0"
+            }
         }
     ],
     "connections": [
         {
-            "id": "connection_679516caf18ce",
-            "sourceId": "widget_67951334b515e",
-            "targetId": "widget_679513375122b",
+            "id": "connection_679536a777508",
+            "sourceId": "widget_6795369d5617b",
+            "targetId": "widget_679536a150282",
             "isArrow": true
         }
     ]

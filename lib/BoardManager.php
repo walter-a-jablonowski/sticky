@@ -25,9 +25,6 @@ class BoardManager
     
     if( ! file_exists($this->boardFile) )
       $this->initBoardFile();
-
-    // Change working directory to base path
-    chdir($this->basePath);
   }
 
   private function initBoardFile() 
@@ -57,7 +54,7 @@ class BoardManager
     
     // Remove elements whose files don't exist anymore
     $data['elements'] = array_filter($data['elements'] ?? [], function($element) {
-      return file_exists($element['source']);
+      return file_exists($this->basePath . '/' . $element['source']);
     });
     
     // Clean up connections for removed elements

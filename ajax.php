@@ -37,7 +37,7 @@ try {
       break;
       
     case 'createWidget':
-      $filename = '- new - ' . date('YmdHis') . '.md';
+      $filename = $config->getBasePath() . '/- new - ' . date('YmdHis') . '.md';
       file_put_contents($filename, $input['content']);
       $widget = $boardManager->addWidget($filename, 'text');
       echo json_encode(['success' => true, 'widget' => $widget]);
