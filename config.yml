@@ -1,0 +1,15 @@
+base_folder: debug
+board_file: .sys/free-view.json
+default_widget:
+  width: 300
+  height: 200
+  color: "#f0f0f0"
+supported_files:
+  text:
+    - txt
+    - md
+  image:
+    - jpg
+    - jpeg
+    - png
+    - gif

@@ -1,0 +1,39 @@
+{
+    "elements": [
+        {
+            "id": "widget_67941a37589e2",
+            "type": "text",
+            "source": "sample1.md",
+            "position": {
+                "x": 30,
+                "y": 77
+            },
+            "dimensions": {
+                "width": 300,
+                "height": 200,
+                "color": "#f0f0f0"
+            }
+        },
+        {
+            "id": "widget_67941a3ba2f8d",
+            "type": "text",
+            "source": "sample2.md",
+            "position": {
+                "x": 516,
+                "y": 284
+            },
+            "dimensions": {
+                "width": 439,
+                "height": 318
+            }
+        }
+    ],
+    "connections": [
+        {
+            "id": "connection_67941a524114c",
+            "sourceId": "widget_67941a37589e2",
+            "targetId": "widget_67941a3ba2f8d",
+            "isArrow": true
+        }
+    ]
+}
