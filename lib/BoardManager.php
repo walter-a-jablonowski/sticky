@@ -78,7 +78,7 @@ class BoardManager
     });
     
     $usedFiles = array_column($boardData['elements'], 'source');
-    return array_values(array_diff($folderContent, $usedFiles));
+    return array_values( array_diff($folderContent, $usedFiles));
   }
 
   public function saveBoardData($data) 
