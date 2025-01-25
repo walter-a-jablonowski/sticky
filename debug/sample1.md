@@ -1,5 +1,3 @@
-# Sample 1
-
 This is a sample markdown to demonstrate the whiteboard functionality
 
 ## Features to try:
