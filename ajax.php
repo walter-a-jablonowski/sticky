@@ -15,20 +15,22 @@ function determineFileType($filename)
   global $config;
   $extension = strtolower(pathinfo($filename, PATHINFO_EXTENSION));
   
-  $textTypes = $config->get('supported_files.text', ['txt', 'md']);
+  $textTypes  = $config->get('supported_files.text',  ['txt', 'md']);
   $imageTypes = $config->get('supported_files.image', ['jpg', 'jpeg', 'png', 'gif']);
   
-  if(in_array($extension, $textTypes)) {
+  if( in_array($extension, $textTypes))
     return 'text';
-  }
-  if(in_array($extension, $imageTypes)) {
+
+  if( in_array($extension, $imageTypes))
     return 'image';
-  }
+
   return null;
 }
 
 try {
-  switch($input['action']) {
+
+  switch($input['action'])
+  {
     case 'getBoardData':
       $data = $boardManager->getBoardData();
       echo json_encode(['success' => true, 'board' => $data]);
@@ -63,16 +65,16 @@ try {
     case 'deleteWidget':
       $data = $boardManager->getBoardData();
       $widget = null;
-      foreach($data['elements'] as $element) {
+      foreach($data['elements'] as $element)
+      {
         if($element['id'] === $input['id']) {
           $widget = $element;
           break;
         }
       }
       
-      if($widget && file_exists($widget['source'])) {
+      if($widget && file_exists($widget['source']))
         unlink($widget['source']);
-      }
       
       $boardManager->removeWidget($input['id']);
       echo json_encode(['success' => true]);
@@ -81,19 +83,21 @@ try {
     case 'saveContent':
       $data = $boardManager->getBoardData();
       $widget = null;
-      foreach($data['elements'] as $element) {
+      foreach($data['elements'] as $element)
+      {
         if($element['id'] === $input['id']) {
           $widget = $element;
           break;
         }
       }
       
-      if($widget && file_exists($widget['source'])) {
+      if($widget && file_exists($widget['source']))
+      {
         file_put_contents($widget['source'], $input['content']);
         echo json_encode(['success' => true]);
-      } else {
-        throw new Exception("Widget or file missing");
       }
+      else
+        throw new Exception("Widget or file missing");
       break;
 
     case 'addConnection':
@@ -101,7 +105,7 @@ try {
         $input['sourceId'],
         $input['targetId'],
         $input['isArrow'] ?? false,
-        $input['label'] ?? ''
+        $input['label']   ?? ''
       );
       echo json_encode(['success' => true, 'connection' => $connection]);
       break;

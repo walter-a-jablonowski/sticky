@@ -52,7 +52,7 @@ class BoardManager
       $this->initBoardFile();
       
     $content = file_get_contents($this->boardFile);
-    $data = json_decode($content, true);
+    $data    = json_decode($content, true);
     
     if( ! is_array($data) || ! isset($data['elements']) || ! isset($data['connections'])) {
       $this->initBoardFile();
