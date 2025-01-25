@@ -39,10 +39,10 @@ class BoardManager
     file_put_contents($this->boardFile, json_encode($data, JSON_PRETTY_PRINT));
   }
 
-  public function getCurrentFolderContent() 
+  public function getCurrentFolderContent()
   {
     return array_filter( scandir('.'), function($file) {
-      return ! in_array($file, ['.', '..', '.sys']) && is_file($file);
+      return ! in_array( $file, ['.', '..', '.sys']) && is_file($file);
     });
   }
 
@@ -81,7 +81,7 @@ class BoardManager
   public function getAvailableFiles($folderContent, $boardData) 
   {
     $usedFiles = array_column($boardData['elements'], 'source');
-    return array_values(array_diff($folderContent, $usedFiles));
+    return array_values( array_diff($folderContent, $usedFiles));
   }
 
   public function saveBoardData($data) 
