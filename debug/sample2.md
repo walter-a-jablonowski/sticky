@@ -1,5 +1,4 @@
-
-              # Sample 2
+# Sample 2
 
 Demonstrate connections between widgets
 

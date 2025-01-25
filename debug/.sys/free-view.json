@@ -9,8 +9,8 @@
                 "y": 79
             },
             "dimensions": {
-                "width": 381,
-                "height": 141
+                "width": 374,
+                "height": 330
             }
         },
         {
@@ -24,6 +24,19 @@
             "dimensions": {
                 "width": 353,
                 "height": 378
+            }
+        },
+        {
+            "id": "widget_67952955b00ba",
+            "type": "image",
+            "source": "images.jpg",
+            "position": {
+                "x": 522,
+                "y": 30
+            },
+            "dimensions": {
+                "width": 300,
+                "height": 200
             }
         }
     ],

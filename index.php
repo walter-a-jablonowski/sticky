@@ -65,7 +65,7 @@ $availableFiles = $boardManager->getAvailableFiles($folderContent, $boardData);
         <div class="widget-content">
           <?php if($element['type'] === 'text'): ?>
             <div class="text-content" contenteditable="true">
-              <?php echo htmlspecialchars(file_get_contents($element['source'])); ?>
+              <pre><?php echo htmlspecialchars(file_get_contents($element['source'])); ?></pre>
             </div>
           <?php elseif($element['type'] === 'image'): ?>
             <img src="<?php echo htmlspecialchars($element['source']); ?>" alt="Widget Image">

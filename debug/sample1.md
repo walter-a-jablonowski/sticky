@@ -8,4 +8,3 @@ This is a sample markdown to demonstrate the whiteboard functionality
 - Change its background color
 - Edit this content
 - Create connections to widgets
-                        
