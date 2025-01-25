@@ -1,10 +1,17 @@
 # Sticky
 
-Try 2 - 250124
+Instantly turns a file system folder in a sticky board, minimal lines of code
 
+**state:** in development (Try 2 - 2024-01-25 AI only)
 
-LICENSE
-----------------------------------------------------------
+Version 2 of [sticky-board](https://github.com/walter-a-jablonowski/sticky-board)
+
+## Usage
+
+- add files from dropdown upper right
+- use the left handle to connect
+
+## License
 
 Copyright (C) Walter A. Jablonowski 2025, free under [MIT license](LICENSE)
 
