@@ -9,8 +9,8 @@
                 "y": 77
             },
             "dimensions": {
-                "width": 328,
-                "height": 359
+                "width": 321,
+                "height": 201
             }
         },
         {
@@ -18,12 +18,12 @@
             "type": "text",
             "source": "sample2.md",
             "position": {
-                "x": 557,
-                "y": 79
+                "x": 932,
+                "y": 71
             },
             "dimensions": {
-                "width": 381,
-                "height": 503
+                "width": 378,
+                "height": 270
             }
         }
     ],
