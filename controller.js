@@ -392,9 +392,13 @@ class Board {
     const scrollLeft = this.whiteboard.scrollLeft
     const scrollTop = this.whiteboard.scrollTop
     
+    // TASK: quick and dirty fix for y shift of lines (AI unable to fix this 2501)
+    // Subtract a percentage of the widget's height from the y-coordinate
+    const yOffset = rect.height * 0.1  // adjust this percentage as needed
+    
     return {
       x: rect.left + rect.width / 2 + scrollLeft,
-      y: rect.top + rect.height / 2 + scrollTop
+      y: rect.top + rect.height / 2 - yOffset + scrollTop
     }
   }
 
