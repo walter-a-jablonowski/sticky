@@ -1,6 +1,6 @@
 # Sticky
 
-Instantly turns a file system folder in a sticky board, minimal lines of code
+Instantly turns a file system folder in a sticky board
 
 **state:** in development (Try 2 - 2024-01-25 AI only)
 
