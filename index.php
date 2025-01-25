@@ -8,6 +8,7 @@ $boardManager = new BoardManager();
 $folderContent = $boardManager->getCurrentFolderContent();
 $boardData = $boardManager->getBoardData();
 $availableFiles = $boardManager->getAvailableFiles($folderContent, $boardData);
+
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -15,7 +16,7 @@ $availableFiles = $boardManager->getAvailableFiles($folderContent, $boardData);
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Free View Board</title>
-  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="style.css?v=<?= time() ?>">
 </head>
 <body>
   <header>
@@ -74,6 +75,6 @@ $availableFiles = $boardManager->getAvailableFiles($folderContent, $boardData);
     <?php endforeach; ?>
   </main>
 
-  <script src="controller.js"></script>
+  <script src="controller.js?v=<?= time() ?>"></script>
 </body>
 </html>
