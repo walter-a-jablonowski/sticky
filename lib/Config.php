@@ -34,10 +34,4 @@ class Config
     
     return $value;
   }
-  
-  public function getBasePath() 
-  {
-    $baseFolder = $this->get('base_folder');
-    return __DIR__ . '/../' . $baseFolder;
-  }
 }
