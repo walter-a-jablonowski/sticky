@@ -1,5 +1,7 @@
 
-introduces a handle for making connections in chat
+Prompt version 1
+
+introduced a handle for making connections in chat
 
 --
 
